@@ -23,7 +23,7 @@ $(function(){
     },
     removeItem: function(id) {
       items = this.state.items
-      _.remove(items, {id: this.props.id});
+      _.remove(items, {id: id});
       this.setState({
         items: items
       })
