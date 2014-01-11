@@ -21,6 +21,13 @@ $(function(){
         text: e.target.value
       })
     },
+    removeItem: function(id) {
+
+      // newItems = this.state.items.remove({id: this.props.id});
+      // this.setState({
+      //   items: newItems
+      // })
+    },
 
     render: function() {
       return (
@@ -36,7 +43,10 @@ $(function(){
             {this.state.items.map(
               function(item){
                 return (
-                  <li>{item.text}</li>
+                  <div>
+                    <li>{item.text}</li>
+                    <button className="btn btn-default" onClick={this.removeItem(item.id)}>Remove task</button>
+                  </div>
                 );
               }
             )}
