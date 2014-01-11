@@ -1,19 +1,17 @@
 /** @jsx React.DOM */
 $(function(){
-  var data = [
-    '1 task',
-    '2 task',
-    '3 task'
-  ];
 
   var todoListContainer = React.createClass({
+    getInitialState: function() {
+      return {items: [], text: '', count: 0};
+    },
     render: function() {
       return (
         <div>
           <todoListHeader />
-          <taskList data={this.props.data} />
+          <taskList items={this.state.items} />
         </div>
-        )
+      );
     }
   });
 
@@ -21,8 +19,8 @@ $(function(){
     render: function() {
       return (
         <div>
-            <h1>TODO list</h1>
-            <taskForm />
+          <h1>TODO list</h1>
+          <taskForm />
         </div>
       );
     }
@@ -30,13 +28,28 @@ $(function(){
 
 
   var taskForm = React.createClass({
+    formSubmit: function(e) {
+      e.preventDefault();
+      newItem = {id: this.state.count, text: this.state.text};
+      newCount = this.state.count + 1;
+      this.setState({
+        items: this.state.items.concat(newItem),
+        count: newCount,
+        text: ''
+      });
+    }
+    inputChange: function(e) {
+      this.setState({
+        text: e.target.value
+      })
+    }
     render: function() {
       return (
         <div className="form-group">
-            <form className="form-inline" onSubmit={this.formSubmit}>
-                <input className="form-control" />
-                <button className="btn btn-default">Add task</button>
-            </form>
+          <form className="form-inline" onSubmit={this.formSubmit}>
+            <input className="form-control" onChange={this.inputChange}/>
+            <button className="btn btn-default">Add task</button>
+          </form>
         </div>
       )
     }
@@ -47,23 +60,23 @@ $(function(){
     render: function() {
       return (
         <ul>
-          {this.props.data.map(
-            function(text){
+          {this.props.items.map(
+            function(item){
               return (
-                <taskItem text={text} />
+                <taskItem text={item.text} />
               );
             }
           )}
         </ul>
-        );
+      );
     }
   });
 
   var taskItem = React.createClass({
     render: function() {
-        return (
-            <li>{this.props.text}</li>
-        );
+      return (
+          <li>{this.props.text}</li>
+      );
     }
   });
 
