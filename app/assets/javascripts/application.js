@@ -15,4 +15,5 @@
 //= require turbolinks
 //= require react
 //= require bootstrap
+//= require lodash.min.js
 //= require todo-list.js.jsx
