@@ -32,10 +32,12 @@ $(function(){
   var taskForm = React.createClass({
     render: function() {
       return (
-        <form onSubmit={this.formSubmit}>
-            <input />
-            <button>Add task</button>
-        </form>
+        <div className="form-group">
+            <form className="form-inline" onSubmit={this.formSubmit}>
+                <input className="form-control" />
+                <button className="btn btn-default">Add task</button>
+            </form>
+        </div>
       )
     }
   })
