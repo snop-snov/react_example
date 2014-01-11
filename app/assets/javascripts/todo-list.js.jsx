@@ -22,11 +22,11 @@ $(function(){
       })
     },
     removeItem: function(id) {
-
-      // newItems = this.state.items.remove({id: this.props.id});
-      // this.setState({
-      //   items: newItems
-      // })
+      items = this.state.items
+      _.remove(items, {id: this.props.id});
+      this.setState({
+        items: items
+      })
     },
 
     render: function() {
@@ -45,10 +45,11 @@ $(function(){
                 return (
                   <div>
                     <li>{item.text}</li>
-                    <button className="btn btn-default" onClick={this.removeItem(item.id)}>Remove task</button>
+                    <button className="btn btn-default" onClick={this.removeItem.bind(this, item.id)}>Remove task</button>
                   </div>
                 );
-              }
+              },
+              this
             )}
           </ul>
         </div>
