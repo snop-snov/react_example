@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 $(function(){
   React.renderComponent(
-    <h1>Hello, world!</h1>,
-    document.getElementById('example')
+    <h1>TODO list</h1>,
+    document.getElementById('todo_component')
   );
 });
