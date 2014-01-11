@@ -7,7 +7,7 @@ $(function(){
     },
     formSubmit: function(e) {
       e.preventDefault();
-      newItem = {id: this.state.count, text: this.state.text};
+      newItem = {id: this.state.count, text: this.state.text, is_disabled: "disabled"};
       newCount = this.state.count + 1;
       newItems = this.state.items.concat(newItem)
       this.setState({
@@ -22,11 +22,25 @@ $(function(){
       })
     },
     removeItem: function(id) {
-      items = this.state.items
+      items = this.state.items;
       _.remove(items, {id: id});
       this.setState({
         items: items
       })
+    },
+    updateItem: function(id) {
+
+    },
+
+    toggleItem: function(id) {
+      items = this.state.items;
+      new_items = _.map(items, function(e){
+        if (e.id == id) {
+          e.is_disables = ''
+        };
+        return e;
+      });
+      this.setState({items: new_items});
     },
 
     render: function() {
@@ -44,7 +58,10 @@ $(function(){
               function(item){
                 return (
                   <div>
-                    <li>{item.text}</li>
+                    <li>
+                      <input value={item.text} onClick={this.toggleItem.bind(this, item.id)} disabled={item.is_disabled} />
+                    </li>
+                    <button className="btn btn-default" onClick={this.updateItem.bind(this, item)}>Update task</button>
                     <button className="btn btn-default" onClick={this.removeItem.bind(this, item.id)}>Remove task</button>
                   </div>
                 );
