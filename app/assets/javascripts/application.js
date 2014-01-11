@@ -15,3 +15,4 @@
 //= require turbolinks
 //= require react
 //= require bootstrap
+//= require todo-list.js.jsx
